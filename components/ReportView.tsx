@@ -66,7 +66,18 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   );
 }
 
-export default function ReportView({ report }: { report: AnalysisReport }) {
+export default function ReportView({ report: raw }: { report: AnalysisReport }) {
+  // 옛 스키마/부분 데이터 방어: 배열 필드 누락 시 빈 배열로 정규화
+  const report: AnalysisReport = {
+    ...raw,
+    relatedLaws: raw.relatedLaws ?? [],
+    interpretations: raw.interpretations ?? [],
+    constitutionalCases: raw.constitutionalCases ?? [],
+    ordinances: raw.ordinances ?? [],
+    conflicts: raw.conflicts ?? [],
+    contributions: raw.contributions ?? [],
+    keywords: raw.keywords ?? [],
+  };
   const tone = verdictTone(report.verdict as Verdict);
   return (
     <div className="space-y-4">

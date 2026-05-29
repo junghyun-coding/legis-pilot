@@ -3,7 +3,8 @@
 import type { Proposal } from "@/types";
 import { SEED_PROPOSALS } from "@/data/proposals";
 
-const KEY = "legisProposals";
+// 스키마가 바뀌면 버전을 올려 옛 (호환 불가) 데이터를 무시한다.
+const KEY = "legisProposals_v3";
 
 // 사용자가 제출한 제안만 localStorage 에 보관 (시드는 코드에 내장).
 function loadStored(): Proposal[] {
