@@ -108,13 +108,17 @@ export async function POST(request: Request) {
   const extracted = await callJSON<ExtractOut>(ex.system, ex.user);
   const keywords = extracted?.keywords?.length ? extracted.keywords : ruleKeywords(full);
   const lawQuery = extracted?.lawQueries?.[0] ?? title ?? keywords[0] ?? "";
+  // 해석례·헌재·조례는 '법령명'이 아니라 '제안 주제 키워드'로 검색한다.
+  // 같은 법 영역(예: 도로교통법)이라도 음주운전 vs 어린이보호구역처럼 주제가 다르면
+  // 인용되는 해석례·판례·조례가 달라져 리포트가 서로 구별된다.
+  const topicQuery = keywords[0] ?? lawQuery;
 
   // 2: 법령 + 법령해석례 + 헌재결정례 + 자치법규 병렬 조회 (API 우선, 시드 폴백)
   const [lawsR, interpR, constR, ordR] = await Promise.all([
     getRelatedLaws(lawQuery, full),
-    getInterpretations(lawQuery, full),
-    getConstitutional(lawQuery, full),
-    getOrdinances(lawQuery, full),
+    getInterpretations(topicQuery, full),
+    getConstitutional(topicQuery, full),
+    getOrdinances(topicQuery, full),
   ]);
 
   // 3: 법적 타당성 분석 (LLM, 실패·응답 손상 시 목업)
