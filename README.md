@@ -1,36 +1,109 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 법령이음 (Legis-Pilot)
 
-## Getting Started
+> 입법 제안 **법적 타당성 검토** 및 시행령 정비 지원 AI
+> 제2회 법령데이터 활용 아이디어 공모전 (법제처) · 제품 및 서비스 개발 부문
 
-First, run the development server:
+국민의 입법 제안을 **국가법령정보**(법제처 공식 데이터)와 실시간으로 대조하여
+시행령 정비 타당성을 판정하고, 부처 협의용 1페이지 검토 리포트를 자동 생성하는
+법제 업무 보조 AI입니다. **AI가 인용하는 법령·해석례·판례는 모두 국가법령정보
+Open API로 실재가 확인된 것만** 사용해 할루시네이션을 차단합니다.
+
+🔗 배포: https://legis-pilot.vercel.app
+
+---
+
+## 핵심 흐름
+
+1. **제안 입력** (`/propose`) — 국민이 일상어로 입력 → LLM이 관련 법령 키워드 추출 + 충돌 사전 안내
+2. **국가법령정보 4종 실시간 조회** — 현행법령·법령해석례·헌재결정례·자치법규(조례)
+3. **법적 타당성 4축 분석** — 실존 근거만 LLM에 제공해 채점 (법적 정합성·유권해석 부합·사법 안전성·시행령 실현가능성)
+4. **타당성 판정 + 1페이지 리포트** (`/dashboard`) — 정비 권고 / 조건부 검토 / 정비 부적합 + 입법형식 판단(시행령 vs 법률 개정)
+
+## 기술 스택
+
+- **Next.js 16** (App Router) · TypeScript · Tailwind CSS
+- **LLM**: OpenAI (`gpt-4o-mini`) — 2단계(검색어 추출 → 타당성 분석), 구조화 JSON 출력
+- **법령 데이터**: 국가법령정보 공유 서비스(공공데이터포털 1170000) — XML 응답을 `fast-xml-parser`로 파싱
+- 배포: Vercel
+
+## 활용 데이터 (국가법령정보 공유 서비스)
+
+| 데이터 | 엔드포인트 | 용도 |
+|---|---|---|
+| 현행 법령 | `lawSearchList` | 상위법 충돌·정합성 검토 |
+| 법령해석례 | `expcSearchList` | 유권해석 일관성 검증 |
+| 헌재결정례 | `detcSearchList` | 위헌·무효 등 사법 리스크 |
+| 자치법규(조례) | `ordinSearchList` | 지자체 정비 맥락 |
+
+모든 호출은 **서버사이드**에서 이뤄지며, 키 미설정·API 장애 시 검증된 시드 데이터로 자동 폴백합니다.
+
+---
+
+## 로컬 실행
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+
+# 환경변수 설정 (아래 참고)
+cp .env.example .env.local   # 값 채우기
+
+npm run dev   # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 환경변수 (`.env.local`)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+OPENAI_API_KEY=sk-...                 # OpenAI API 키
+OPENAI_MODEL=gpt-4o-mini              # (선택) 기본 gpt-4o-mini
+LAW_API_KEY=...                       # 국가법령정보 인증키(encoding 값)
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+> ⚠️ `.env.local`은 git에 커밋되지 않습니다(`.gitignore`). 키를 코드/문서에 하드코딩하지 마세요.
+> 키가 없어도 앱은 시드 데이터로 동작하지만, 실데이터 연동을 보려면 키가 필요합니다.
 
-## Learn More
+## 프로젝트 구조
 
-To learn more about Next.js, take a look at the following resources:
+```
+app/
+  page.tsx              랜딩
+  propose/page.tsx      국민 제안 입력 + AI 사전검토
+  dashboard/page.tsx    공무원 검토 대시보드 + 1페이지 리포트
+  api/analyze/route.ts  분석 파이프라인 (핵심)
+lib/
+  lawApi.ts             국가법령정보 4종 어댑터 (XML 파싱 + 시드 폴백)
+  llm.ts                OpenAI 호출 래퍼 (+ 폴백)
+  prompt.ts             LLM 프롬프트 (검색어 추출 / 타당성 분석)
+  scoring.ts            4축 가중합 + 판정 (정비 권고/조건부/부적합)
+  store.ts              제안 상태 (localStorage)
+components/ReportView.tsx   1페이지 타당성 리포트 UI
+data/                   시드 데이터 (API 폴백용)
+types.ts                공용 타입
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 타당성 점수 산정
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+4축을 가중합해 0~100 점수를 내고 판정합니다.
 
-## Deploy on Vercel
+- 가중치: 법적 정합성 0.35 · 사법 안전성 0.30 · 유권해석 부합 0.20 · 시행령 실현가능성 0.15
+- 판정: 68점↑ **정비 권고** / 45점↑ **조건부 검토** / 그 미만 **정비 부적합**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 현재 한계 & 로드맵 (정직하게)
+
+**현재(MVP)에서 구현된 것**
+- 국가법령정보 4종 실시간 연동, 실존 근거만 인용, 4축 타당성 판정, 입법형식 판단, 웹앱 배포
+
+**한계**
+- 법령 **목록 검색**만 사용 — 조문 *본문*을 가져와 한 줄씩 대조하진 않음(충돌 판단의 일부는 LLM 추론). 즉 "인용 근거의 실재"는 보장하나 "조문 내용 검증"까지 100%는 아님.
+- 판정 점수는 LLM 추정값이라 변동 가능 — 정답셋 기반 정확도 평가 미실시.
+- 제안 데이터는 브라우저 localStorage 저장(서버 DB·로그인 없음).
+
+**로드맵**
+- 조문 본문 조회(RAG)로 실제 조문 대조 (별도 인증키 OC 필요)
+- 대법원 판례·정부입법예고·민원/상권 데이터 결합
+- 고급 분석(GNN/시계열/XAI)은 연구 과제
+
+---
+
+본 프로젝트는 공모전 제출용 시제품(MVP)입니다.
