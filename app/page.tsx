@@ -70,7 +70,7 @@ export default function Home() {
           ))}
         </div>
         <p className="mt-8 text-center text-xs text-slate-400">
-          활용 데이터: 국가법령정보 공유 서비스(법제처) · 법령해석례 · 판례 · 민원 빅데이터
+          활용 데이터: 국가법령정보 공유 서비스(법제처) — 현행법령 · 법령해석례 · 헌재결정례 · 자치법규 실시간 연동
         </p>
       </section>
     </main>

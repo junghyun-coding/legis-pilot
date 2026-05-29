@@ -104,12 +104,23 @@ export default function ProposePage() {
           <button
             type="submit"
             disabled={loading || !title.trim()}
-            className="rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700 disabled:opacity-50"
+            className="inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700 disabled:opacity-50"
           >
+            {loading && (
+              <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+            )}
             {loading ? "AI 분석 중…" : "제안 제출 및 AI 사전검토"}
           </button>
           {error && <p className="text-sm text-rose-600">{error}</p>}
         </form>
+
+        {loading && (
+          <div className="mt-6 flex items-center gap-3 rounded-lg border border-blue-200 bg-blue-50 p-4 text-sm text-blue-800">
+            <span className="inline-block h-5 w-5 shrink-0 animate-spin rounded-full border-2 border-blue-500 border-t-transparent" />
+            국가법령정보 4종(법령·해석례·헌재·조례)을 실시간 조회하고 AI가 법적 타당성을 분석하고
+            있습니다… 최대 10초가량 걸릴 수 있어요.
+          </div>
+        )}
 
         {report && (
           <section className="mt-10">

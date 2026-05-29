@@ -53,10 +53,18 @@ export default function DashboardPage() {
       <div className="mx-auto flex max-w-7xl flex-col gap-6 px-6 py-6 lg:flex-row">
         {/* 좌측: 접수 목록 */}
         <aside className="no-print w-full shrink-0 lg:w-80">
-          <h2 className="mb-3 text-sm font-semibold text-slate-500">실시간 접수 목록</h2>
+          <h2 className="mb-1 text-sm font-semibold text-slate-500">실시간 접수 목록</h2>
+          <p className="mb-3 text-xs leading-relaxed text-slate-400">
+            &apos;예시&apos; 표시 건은 데모용 샘플입니다.{" "}
+            <Link href="/propose" className="text-blue-600 underline">
+              제안 입력
+            </Link>
+            에서 넣으면 국가법령정보 4종을 실시간 분석합니다.
+          </p>
           <ul className="space-y-2">
             {proposals.map((p) => {
               const tone = p.report ? verdictTone(p.report.verdict) : null;
+              const isSample = p.id.startsWith("seed-");
               return (
                 <li key={p.id}>
                   <button
@@ -68,10 +76,17 @@ export default function DashboardPage() {
                     }`}
                   >
                     <div className="flex items-center justify-between gap-2">
-                      <span
-                        className={`rounded px-1.5 py-0.5 text-[11px] font-medium ${STATUS_COLOR[p.status]}`}
-                      >
-                        {p.status}
+                      <span className="flex items-center gap-1">
+                        <span
+                          className={`rounded px-1.5 py-0.5 text-[11px] font-medium ${STATUS_COLOR[p.status]}`}
+                        >
+                          {p.status}
+                        </span>
+                        {isSample && (
+                          <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[11px] font-medium text-slate-400">
+                            예시
+                          </span>
+                        )}
                       </span>
                       {p.report && tone && (
                         <span
