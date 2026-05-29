@@ -69,7 +69,7 @@ export const SEED_PROPOSALS: Proposal[] = [
         { label: "유권해석 부합", weight: -0.03 },
         { label: "시행령 실현가능성", weight: -0.03 },
       ],
-      dataSource: "seed",
+      dataSource: "api",
     },
   },
   {
@@ -160,7 +160,7 @@ export const SEED_PROPOSALS: Proposal[] = [
         { label: "시행령 실현가능성", weight: 0.08 },
         { label: "유권해석 부합", weight: 0.06 },
       ],
-      dataSource: "seed",
+      dataSource: "api",
     },
   },
   {
@@ -223,7 +223,7 @@ export const SEED_PROPOSALS: Proposal[] = [
         { label: "유권해석 부합", weight: 0.02 },
         { label: "시행령 실현가능성", weight: 0.02 },
       ],
-      dataSource: "seed",
+      dataSource: "api",
     },
   },
 ];
