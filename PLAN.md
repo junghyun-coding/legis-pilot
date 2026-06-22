@@ -41,7 +41,12 @@
 - V1 tsc/lint/build + CI 통과 + 링크/배지 점검 (직접 런타임 확인)
 
 ## 진행 로그
-- 2026-06-22: 포트폴리오화 스카우트 완료(LICENSE/템플릿/메타 부재, repo PRIVATE, 랜딩 STEP03 불일치 확인). PLAN 재작성. 사이클 1 시작.
+- 2026-06-22: 포트폴리오화 스카우트 완료(LICENSE/템플릿/메타 부재, repo PRIVATE, 랜딩 STEP03 불일치 확인). PLAN 재작성.
+- 사이클1: 깃허브 위생 8파일 생성(LICENSE/CONTRIBUTING/SECURITY/이슈·PR템플릿/dependabot/package.json메타/.env.example). tsc·lint·build·CI 통과. 커밋·push.
+- 사이클2: README 목차·화면·배지(MIT/Next/TS), 랜딩 STEP03 정정, docs/images 캡처 가이드.
+- 사이클3: repo About(desc·homepage·8 topics) 설정, 시크릿 스캔 0건(public 안전 확인).
+- 사이클4: **public 전환 완료**(visibility=PUBLIC). CD는 **수동(vercel --prod) 유지로 확정**(Actions 워크플로 안 만듦). v0.1.0 릴리스 발행.
+- **남은 사용자 몫(선택)**: 화면 캡처 docs/images/ 추가 후 README 화면 섹션 주석 해제, CASE_STUDY.md 기간 채우기. CD 자동화 원하면 Vercel App 설치(orgId=team_5ytmraVd4rdf9NxpofWrfhY1 / projectId=prj_pxK91VlUh7UjyuFc3KOqTAaN8yCn).
 
 ## 하드 규칙
 - 동시 build 금지. 위생 파일은 독립이라 병렬 OK, 빌드/검증은 사이클 후 메인이 직접.
