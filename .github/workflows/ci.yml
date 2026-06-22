@@ -18,8 +18,10 @@ jobs:
           node-version: 20
           cache: npm
 
+      # npm ci 대신 npm install: Windows에서 생성된 lock 과 Linux 러너의
+      # 플랫폼별 optional 의존성(@emnapi wasm 런타임 등) 불일치를 우회한다.
       - name: Install dependencies
-        run: npm ci
+        run: npm install --no-audit --no-fund
 
       - name: Lint
         run: npm run lint
