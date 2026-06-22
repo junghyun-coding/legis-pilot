@@ -3,9 +3,6 @@ import type { LawHit, InterpretationHit, ConstitutionalHit, OrdinanceHit } from 
 import { buildPublicLink } from "@/lib/lawLink";
 import { rerankLaws } from "@/lib/lawRerank";
 import { matchSeedLaws } from "@/data/laws";
-import { matchInterpretations } from "@/data/interpretations";
-import { matchConstitutional } from "@/data/constitutional";
-import { matchOrdinances } from "@/data/ordinances";
 
 // 국가법령정보 공유 서비스 (공공데이터포털 1170000)
 // 명세: 응답 XML only, 한글 태그. ServiceKey 는 encoding 값을 URL 에 그대로 삽입.
@@ -155,20 +152,18 @@ async function fetchInterpretationsFromApi(
 }
 
 /**
- * 법령해석례 조회 (실연동 우선, 실패 시 시드 폴백).
+ * 법령해석례 조회. 후보 검색어(주제어→법령도메인어→키워드)를 순차 시도해
+ * 실연동 결과를 찾는다. 모두 0건이면 가짜 데이터 대신 빈 값(섹션 숨김) — 정직성 우선.
  */
 export async function getInterpretations(
-  query: string,
-  fallbackText: string,
+  queries: string[],
 ): Promise<{ items: InterpretationHit[]; source: "api" | "seed" }> {
-  const apiItems = await fetchInterpretationsFromApi(query);
-  if (apiItems && apiItems.length > 0) {
-    return { items: apiItems, source: "api" };
+  for (const q of queries) {
+    if (!q) continue;
+    const apiItems = await fetchInterpretationsFromApi(q);
+    if (apiItems && apiItems.length > 0) return { items: apiItems, source: "api" };
   }
-  return {
-    items: matchInterpretations(fallbackText.split(/\s+/)),
-    source: "seed",
-  };
+  return { items: [], source: "api" };
 }
 
 // 헌재결정례 엔드포인트 (target=detc)
@@ -225,20 +220,17 @@ async function fetchConstitutionalFromApi(
 }
 
 /**
- * 헌재결정례 조회 (실연동 우선, 실패 시 시드 폴백).
+ * 헌재결정례 조회. 후보 검색어를 순차 시도. 모두 0건이면 빈 값(섹션 숨김).
  */
 export async function getConstitutional(
-  query: string,
-  fallbackText: string,
+  queries: string[],
 ): Promise<{ items: ConstitutionalHit[]; source: "api" | "seed" }> {
-  const apiItems = await fetchConstitutionalFromApi(query);
-  if (apiItems && apiItems.length > 0) {
-    return { items: apiItems, source: "api" };
+  for (const q of queries) {
+    if (!q) continue;
+    const apiItems = await fetchConstitutionalFromApi(q);
+    if (apiItems && apiItems.length > 0) return { items: apiItems, source: "api" };
   }
-  return {
-    items: matchConstitutional(fallbackText.split(/\s+/)),
-    source: "seed",
-  };
+  return { items: [], source: "api" };
 }
 
 // 자치법규(조례) 엔드포인트 (target=ordin)
@@ -295,18 +287,15 @@ async function fetchOrdinancesFromApi(
 }
 
 /**
- * 자치법규 조회 (실연동 우선, 실패 시 시드 폴백).
+ * 자치법규 조회. 후보 검색어를 순차 시도. 모두 0건이면 빈 값(섹션 숨김).
  */
 export async function getOrdinances(
-  query: string,
-  fallbackText: string,
+  queries: string[],
 ): Promise<{ items: OrdinanceHit[]; source: "api" | "seed" }> {
-  const apiItems = await fetchOrdinancesFromApi(query);
-  if (apiItems && apiItems.length > 0) {
-    return { items: apiItems, source: "api" };
+  for (const q of queries) {
+    if (!q) continue;
+    const apiItems = await fetchOrdinancesFromApi(q);
+    if (apiItems && apiItems.length > 0) return { items: apiItems, source: "api" };
   }
-  return {
-    items: matchOrdinances(fallbackText.split(/\s+/)),
-    source: "seed",
-  };
+  return { items: [], source: "api" };
 }

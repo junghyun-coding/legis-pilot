@@ -1,8 +1,8 @@
 import type { Proposal } from "@/types";
 
-// 대시보드 초기 표시용 제안.
-// 실제 /api/analyze 결과(국가법령정보 4종 실연동)를 고정 스냅샷으로 저장한 것이라
-// 인용 법령·해석례·헌재·조례 링크가 모두 law.go.kr 원문으로 연결된다.
+// 대시보드 초기 표시용 제안 4건.
+// 실제 /api/analyze(국가법령정보 4종 실연동) 결과를 고정 스냅샷으로 저장한 것이라
+// 인용 법령·해석례·헌재·조례가 모두 실존 데이터이며 law.go.kr 공개뷰어 원문으로 연결된다.
 export const SEED_PROPOSALS: Proposal[] = [
   {
     "id": "seed-1",
@@ -14,32 +14,24 @@ export const SEED_PROPOSALS: Proposal[] = [
       "keywords": [
         "음주운전",
         "초범",
-        "처벌 완화",
+        "처벌",
+        "면허",
         "생계형 운전자"
       ],
       "verdict": "정비 부적합",
-      "summary": "음주운전 초범에 대한 처벌 완화 제안은 법률적 근거가 부족하며, 형벌 강화와 관련된 사항으로 법적 정합성이 낮습니다.",
-      "recommendation": "법률 개정이 필요하므로 소관 부처와 협의하여 보다 구체적인 대안을 모색해야 합니다.",
-      "formNote": "제안 내용은 시행령 정비로 실현하기 어려우며, 법률 개정이 필요합니다.",
-      "legalFitNote": "도로교통법 제44조에 따라 음주운전의 처벌은 법률에 명시되어 있어, 시행령으로 처벌을 완화하는 것은 법적 정합성이 없습니다.",
+      "summary": "음주운전 초범에 대한 처벌 완화 제안은 도로교통법의 기본 원칙과 충돌할 가능성이 높아 법적 타당성이 낮습니다.",
+      "recommendation": "해당 제안은 법률 개정이 필요하므로, 소관 부처와의 협의를 권고합니다.",
+      "formNote": "음주운전 처벌 완화는 법률에 명시된 사항으로, 시행령 정비만으로는 실현이 어렵습니다.",
+      "legalFitNote": "도로교통법 제44조는 음주운전의 처벌을 규정하고 있어, 초범에 대한 처벌 완화는 법적 정합성을 결여합니다.",
       "conflictRisk": "높음",
       "conflicts": [
         {
           "law": "도로교통법",
-          "detail": "제44조에 따라 음주운전의 처벌이 규정되어 있어, 초범에 대한 처벌 완화는 법률과 충돌함."
+          "detail": "제44조에 따라 음주운전은 처벌 대상이며, 초범에 대한 처벌 완화는 법령의 취지와 상충합니다."
         }
       ],
-      "adminNote": "행정적으로도 음주운전 처벌 완화는 사회적 안전과 관련된 문제로 집행에 부정적인 영향을 미칠 수 있습니다.",
+      "adminNote": "행정적으로도 음주운전 처벌 완화는 집행의 일관성을 해칠 수 있습니다.",
       "relatedLaws": [
-        {
-          "id": "000105",
-          "name": "교통시설특별회계법",
-          "ministry": "국토교통부",
-          "promulgated": "20251001",
-          "enforced": "20260102",
-          "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=276947",
-          "source": "api"
-        },
         {
           "id": "001638",
           "name": "도로교통법",
@@ -53,9 +45,9 @@ export const SEED_PROPOSALS: Proposal[] = [
           "id": "003395",
           "name": "도로교통법 시행령",
           "ministry": "경찰청",
-          "promulgated": "20250318",
-          "enforced": "20260319",
-          "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=269989",
+          "promulgated": "20260609",
+          "enforced": "20260609",
+          "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=286789",
           "source": "api"
         },
         {
@@ -153,15 +145,6 @@ export const SEED_PROPOSALS: Proposal[] = [
           "source": "api"
         },
         {
-          "id": "2258185",
-          "name": "광주광역시 서구 음주운전 예방과 근절에 관한 조례",
-          "region": "광주광역시 서구",
-          "kind": "조례",
-          "enforced": "20251111",
-          "link": "https://www.law.go.kr/LSW/ordinInfoP.do?ordinSeq=2084207",
-          "source": "api"
-        },
-        {
           "id": "2259279",
           "name": "광주시 음주운전 예방과 근절에 관한 조례",
           "region": "경기도 광주시",
@@ -187,19 +170,32 @@ export const SEED_PROPOSALS: Proposal[] = [
           "enforced": "20231219",
           "link": "https://www.law.go.kr/LSW/ordinInfoP.do?ordinSeq=1883319",
           "source": "api"
+        },
+        {
+          "id": "2253639",
+          "name": "대구광역시 군위군 음주운전 예방에 관한 조례",
+          "region": "대구광역시 군위군",
+          "kind": "조례",
+          "enforced": "20250526",
+          "link": "https://www.law.go.kr/LSW/ordinInfoP.do?ordinSeq=2041491",
+          "source": "api"
         }
       ],
       "scores": {
         "legalFit": 20,
-        "precedentSupport": 30,
+        "precedentSupport": 0,
         "judicialSafety": 30,
         "feasibility": 20
       },
-      "feasibilityScore": 25,
+      "feasibilityScore": 19,
       "contributions": [
         {
           "label": "법적 정합성",
           "weight": -0.21
+        },
+        {
+          "label": "유권해석 부합",
+          "weight": -0.2
         },
         {
           "label": "사법 안전성",
@@ -208,10 +204,6 @@ export const SEED_PROPOSALS: Proposal[] = [
         {
           "label": "시행령 실현가능성",
           "weight": -0.09
-        },
-        {
-          "label": "유권해석 부합",
-          "weight": -0.08
         }
       ],
       "dataSource": "api"
@@ -227,32 +219,23 @@ export const SEED_PROPOSALS: Proposal[] = [
       "keywords": [
         "어린이보호구역",
         "속도제한",
-        "심야",
+        "심야 시간대",
         "통학 차량"
       ],
       "verdict": "정비 부적합",
-      "summary": "어린이 보호구역의 심야 시간대 속도제한 완화 제안은 기존 법령과 충돌할 가능성이 있으며, 법적 정합성이 낮고 사법 리스크가 존재합니다.",
-      "recommendation": "소관 부처와 협의하여 법률 개정의 필요성을 검토할 것을 권고합니다.",
-      "formNote": "이 제안은 시행령 정비만으로는 실현이 어려워 법률 개정이 필요합니다.",
-      "legalFitNote": "도로교통법 제12조에 따라 어린이 보호구역 내 속도 제한은 법적으로 정해져 있어, 이를 완화하는 것은 법적 정합성이 낮습니다.",
+      "summary": "어린이 보호구역의 심야 시간대 속도제한 완화 제안은 도로교통법의 기본 취지와 충돌할 가능성이 있으며, 법적 정합성이 낮아 타당성이 부족합니다.",
+      "recommendation": "권고 (소관 부처와 협의하여 대안 모색 필요)",
+      "formNote": "법률 개정이 필요할 것으로 보이며, 시행령 정비만으로는 실현이 어려울 것입니다.",
+      "legalFitNote": "도로교통법 제12조는 어린이 보호구역 내에서의 안전을 강조하고 있어, 심야 시간대 속도제한 완화는 법적 정합성이 낮습니다.",
       "conflictRisk": "높음",
       "conflicts": [
         {
           "law": "도로교통법",
-          "detail": "제12조에 따라 어린이 보호구역 내 속도 제한이 정해져 있어, 심야 시간대 속도제한 완화는 법령과 충돌합니다."
+          "detail": "제12조에 따라 어린이 보호구역 내에서의 속도제한 규정과 충돌할 가능성이 있음"
         }
       ],
-      "adminNote": "행정적으로도 어린이 보호구역의 안전성을 고려할 때, 속도제한 완화는 집행에 어려움을 초래할 수 있습니다.",
+      "adminNote": "행정적으로 어린이 보호구역의 안전성을 저해할 수 있는 우려가 있어 집행에 어려움이 있을 수 있습니다.",
       "relatedLaws": [
-        {
-          "id": "000105",
-          "name": "교통시설특별회계법",
-          "ministry": "국토교통부",
-          "promulgated": "20251001",
-          "enforced": "20260102",
-          "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=276947",
-          "source": "api"
-        },
         {
           "id": "001638",
           "name": "도로교통법",
@@ -266,9 +249,9 @@ export const SEED_PROPOSALS: Proposal[] = [
           "id": "003395",
           "name": "도로교통법 시행령",
           "ministry": "경찰청",
-          "promulgated": "20250318",
-          "enforced": "20260319",
-          "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=269989",
+          "promulgated": "20260609",
+          "enforced": "20260609",
+          "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=286789",
           "source": "api"
         },
         {
@@ -310,7 +293,48 @@ export const SEED_PROPOSALS: Proposal[] = [
           "source": "api"
         }
       ],
-      "constitutionalCases": [],
+      "constitutionalCases": [
+        {
+          "id": "137520",
+          "caseNo": "2007헌바66",
+          "title": "구 도로교통법 제101조의 3 등  위헌소원",
+          "date": "2008.10.30",
+          "link": "https://www.law.go.kr/LSW/detcInfoP.do?detcSeq=137520",
+          "source": "api"
+        },
+        {
+          "id": "17670",
+          "caseNo": "2011헌가30",
+          "title": "구 도로교통법 제116조 위헌제청",
+          "date": "2011.11.24",
+          "link": "https://www.law.go.kr/LSW/detcInfoP.do?detcSeq=17670",
+          "source": "api"
+        },
+        {
+          "id": "52663",
+          "caseNo": "2016헌가10",
+          "title": "구 도로교통법 제116조 위헌제청",
+          "date": "2016.10.27",
+          "link": "https://www.law.go.kr/LSW/detcInfoP.do?detcSeq=52663",
+          "source": "api"
+        },
+        {
+          "id": "41665",
+          "caseNo": "2014헌가14",
+          "title": "구 도로교통법 제116조 위헌제청",
+          "date": "2014.11.27",
+          "link": "https://www.law.go.kr/LSW/detcInfoP.do?detcSeq=41665",
+          "source": "api"
+        },
+        {
+          "id": "150765",
+          "caseNo": "2017헌가28",
+          "title": "구 도로교통법 제148조 위헌제청",
+          "date": "2019.04.11",
+          "link": "https://www.law.go.kr/LSW/detcInfoP.do?detcSeq=150765",
+          "source": "api"
+        }
+      ],
       "ordinances": [
         {
           "id": "2214760",
@@ -361,10 +385,10 @@ export const SEED_PROPOSALS: Proposal[] = [
       "scores": {
         "legalFit": 30,
         "precedentSupport": 0,
-        "judicialSafety": 30,
+        "judicialSafety": 40,
         "feasibility": 20
       },
-      "feasibilityScore": 23,
+      "feasibilityScore": 26,
       "contributions": [
         {
           "label": "유권해석 부합",
@@ -375,12 +399,12 @@ export const SEED_PROPOSALS: Proposal[] = [
           "weight": -0.14
         },
         {
-          "label": "사법 안전성",
-          "weight": -0.12
-        },
-        {
           "label": "시행령 실현가능성",
           "weight": -0.09
+        },
+        {
+          "label": "사법 안전성",
+          "weight": -0.06
         }
       ],
       "dataSource": "api"
@@ -401,13 +425,13 @@ export const SEED_PROPOSALS: Proposal[] = [
         "지원"
       ],
       "verdict": "정비 권고",
-      "summary": "소상공인 간판 교체 비용 지원은 옥외광고물 관리법의 취지에 부합하며, 시행령 정비로 실현 가능성이 높습니다.",
+      "summary": "소상공인 간판 교체 비용 지원은 옥외광고물법의 취지에 부합하며, 시행령 정비로 실현 가능성이 높습니다.",
       "recommendation": "행정안전부와 협의하여 구체적인 지원 방안을 마련할 것을 권고합니다.",
-      "formNote": "이 제안은 시행령 정비로 가능할 것으로 보이며, 법률 개정은 필요하지 않을 것으로 판단됩니다.",
-      "legalFitNote": "옥외광고물 관리법의 목적과 소상공인 지원의 필요성이 일치하여 법적 정합성이 높습니다.",
+      "formNote": "이 제안은 시행령 정비로 가능하며, 법률 개정이 필요하지 않습니다.",
+      "legalFitNote": "옥외광고물법은 광고물의 설치 및 관리에 관한 규정을 두고 있으며, 소상공인 지원을 위한 시행령 정비는 법의 취지에 부합합니다.",
       "conflictRisk": "낮음",
       "conflicts": [],
-      "adminNote": "소상공인 지원을 위한 행정적 부담이 증가할 수 있으나, 골목상권 활성화에 긍정적인 영향을 미칠 것으로 예상됩니다.",
+      "adminNote": "소상공인 지원을 위한 행정적 부담이 증가할 수 있으나, 지역 경제 활성화에 기여할 수 있습니다.",
       "relatedLaws": [
         {
           "id": "001020",
@@ -430,44 +454,91 @@ export const SEED_PROPOSALS: Proposal[] = [
       ],
       "interpretations": [
         {
-          "id": "i-003",
-          "title": "옥외광고물 등의 관리 법령상 허가·신고 기준의 지자체 위임 가능 여부",
-          "caseNo": "법제처 21-0233",
+          "id": "338817",
+          "title": "국토교통부, 행정안전부 - 옥외광고물법에 따라 설치 허가를 받은 광고탑의 경우 「건축법」에 따라 공작물 축조 신고를 해야 하는지(「건축법」 제83조제1항 등 관련)",
+          "caseNo": "24-0249",
           "agency": "법제처",
-          "date": "2021-06-18",
-          "source": "seed"
+          "date": "2024.06.05",
+          "link": "https://www.law.go.kr/LSW/expcInfoP.do?expcSeq=338817",
+          "source": "api"
         },
         {
-          "id": "i-002",
-          "title": "식품위생법상 영업시간 제한 처분의 위임 한계에 관한 건",
-          "caseNo": "법제처 20-0115",
+          "id": "338813",
+          "title": "국토교통부, 행정안전부 - 옥외광고물법에 따라 설치 허가를 받은 광고탑의 경우 「건축법」에 따라 공작물 축조 신고를 해야 하는지(「건축법」 제83조제1항 등 관련)",
+          "caseNo": "24-0340",
           "agency": "법제처",
-          "date": "2020-04-12",
-          "source": "seed"
+          "date": "2024.06.05",
+          "link": "https://www.law.go.kr/LSW/expcInfoP.do?expcSeq=338813",
+          "source": "api"
         },
         {
-          "id": "i-004",
-          "title": "주차장법 부설주차장 설치의무 완화의 시행령 정비 가능 범위",
-          "caseNo": "법제처 22-0087",
+          "id": "324867",
+          "title": "기장군 - 현수막을 표시ㆍ설치할 수 있는 기간(「옥외광고물 등 관리법」 제8조제4호 등 관련)",
+          "caseNo": "13-0524",
           "agency": "법제처",
-          "date": "2022-03-22",
-          "source": "seed"
+          "date": "2013.12.11",
+          "link": "https://www.law.go.kr/LSW/expcInfoP.do?expcSeq=324867",
+          "source": "api"
+        },
+        {
+          "id": "322605",
+          "title": "대전광역시 동구청 - 구청장이 육교를 공공목적 광고물 표시가 가능한 편익시설물로 지정할 수 있는지 여부(「옥외광고물등 관리법 시행령」 제26조제1항제5호 관련)",
+          "caseNo": "09-0246",
+          "agency": "법제처",
+          "date": "2009.09.04",
+          "link": "https://www.law.go.kr/LSW/expcInfoP.do?expcSeq=322605",
+          "source": "api"
+        },
+        {
+          "id": "324273",
+          "title": "민원인 - 경찰이 범죄예방 등을 위하여 주거지역에 붙인 안내문의 「옥외광고물 등 관리법」 위반 여부(「옥외광고물 등 관리법」 제8조 등 관련)",
+          "caseNo": "11-0234",
+          "agency": "법제처",
+          "date": "2011.07.07",
+          "link": "https://www.law.go.kr/LSW/expcInfoP.do?expcSeq=324273",
+          "source": "api"
         }
       ],
       "constitutionalCases": [
         {
-          "id": "c-003",
-          "caseNo": "2019헌마1399",
-          "title": "옥외광고물 등 관리법 과태료 부과조항 위헌확인",
-          "date": "2021-03-25",
-          "source": "seed"
+          "id": "171463",
+          "caseNo": "2019헌마327",
+          "title": "구 옥외광고물 등 관리법 시행령 제19조 제1항 등 위헌확인",
+          "date": "2022.01.27",
+          "link": "https://www.law.go.kr/LSW/detcInfoP.do?detcSeq=171463",
+          "source": "api"
         },
         {
-          "id": "c-002",
-          "caseNo": "2020헌바471",
-          "title": "식품위생법상 영업정지 처분 근거조항 위헌소원",
-          "date": "2021-11-25",
-          "source": "seed"
+          "id": "135423",
+          "caseNo": "96헌바2",
+          "title": "옥외광고물등관리법 제3조  위헌소원",
+          "date": "1998.02.27",
+          "link": "https://www.law.go.kr/LSW/detcInfoP.do?detcSeq=135423",
+          "source": "api"
+        },
+        {
+          "id": "134492",
+          "caseNo": "2000헌마764",
+          "title": "옥외광고물등관리법 제3조 제1항 제6호 등 위헌확인",
+          "date": "2002.12.18",
+          "link": "https://www.law.go.kr/LSW/detcInfoP.do?detcSeq=134492",
+          "source": "api"
+        },
+        {
+          "id": "184689",
+          "caseNo": "2023헌마893",
+          "title": "옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 법률 개정 위헌확인",
+          "date": "2023.08.08",
+          "link": "https://www.law.go.kr/LSW/detcInfoP.do?detcSeq=184689",
+          "source": "api"
+        },
+        {
+          "id": "189795",
+          "caseNo": "2024헌바79",
+          "title": "옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 법률 제8조 위헌소원",
+          "date": "2024.04.02",
+          "link": "https://www.law.go.kr/LSW/detcInfoP.do?detcSeq=189795",
+          "source": "api"
         }
       ],
       "ordinances": [
@@ -550,7 +621,7 @@ export const SEED_PROPOSALS: Proposal[] = [
     "title": "상가 밀집지역 불법 주정차 단속을 강화해 주세요",
     "body": "가게 앞에 불법 주차된 차량 때문에 손님이 못 옵니다. 상권 보호를 위해 단속을 강화해 주세요.",
     "submittedAt": "2026-05-29T08:05:00.000Z",
-    "status": "검토완료",
+    "status": "검토중",
     "report": {
       "keywords": [
         "상가 밀집지역",
@@ -558,29 +629,15 @@ export const SEED_PROPOSALS: Proposal[] = [
         "단속 강화",
         "상권 보호"
       ],
-      "verdict": "조건부 검토",
-      "summary": "상가 밀집지역의 불법 주정차 단속 강화는 상권 보호를 위한 필요성이 있으나, 법적 근거와 집행 형평성에 대한 논란이 있을 수 있습니다.",
-      "recommendation": "소관 부처와 협의하여 단속 강화 방안을 모색할 필요가 있습니다.",
-      "formNote": "시행령 정비로 단속을 강화하는 방안은 가능할 수 있으나, 법률 개정이 필요할 수도 있습니다.",
-      "legalFitNote": "도로교통법 및 시행령에 따라 불법 주정차 단속의 법적 근거가 있으나, 단속 강화가 기존 규정과 충돌할 가능성이 있습니다.",
-      "conflictRisk": "보통",
-      "conflicts": [
-        {
-          "law": "도로교통법",
-          "detail": "제32조에 따른 주정차 금지 구역 지정 및 단속 기준과의 충돌 가능성"
-        }
-      ],
-      "adminNote": "단속 강화로 인해 행정 부담이 증가할 수 있으며, 집행의 형평성 문제가 발생할 수 있습니다.",
+      "verdict": "정비 권고",
+      "summary": "상가 밀집지역의 불법 주정차 단속 강화는 도로교통법에 근거하여 가능하나, 구체적인 단속 기준 및 절차에 대한 시행령 정비가 필요할 것으로 보입니다.",
+      "recommendation": "경찰청과 협의하여 시행령 정비 방안을 모색할 것을 권고합니다.",
+      "formNote": "이 제안은 시행령 정비로 가능하며, 법률 개정은 필요하지 않습니다.",
+      "legalFitNote": "도로교통법 제32조에 따라 불법 주정차에 대한 단속이 가능하므로 법적 정합성이 높습니다.",
+      "conflictRisk": "낮음",
+      "conflicts": [],
+      "adminNote": "단속 강화에 따른 행정 부담이 증가할 수 있으나, 상권 보호를 위한 필요성이 있습니다.",
       "relatedLaws": [
-        {
-          "id": "000105",
-          "name": "교통시설특별회계법",
-          "ministry": "국토교통부",
-          "promulgated": "20251001",
-          "enforced": "20260102",
-          "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=276947",
-          "source": "api"
-        },
         {
           "id": "001638",
           "name": "도로교통법",
@@ -594,9 +651,9 @@ export const SEED_PROPOSALS: Proposal[] = [
           "id": "003395",
           "name": "도로교통법 시행령",
           "ministry": "경찰청",
-          "promulgated": "20250318",
-          "enforced": "20260319",
-          "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=269989",
+          "promulgated": "20260609",
+          "enforced": "20260609",
+          "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=286789",
           "source": "api"
         },
         {
@@ -620,88 +677,163 @@ export const SEED_PROPOSALS: Proposal[] = [
       ],
       "interpretations": [
         {
-          "id": "i-004",
-          "title": "주차장법 부설주차장 설치의무 완화의 시행령 정비 가능 범위",
-          "caseNo": "법제처 22-0087",
+          "id": "313774",
+          "title": "경기도 안산시 - 버스가 버스정류장에서 배차간격 조정 또는 중식의 사유로 10분 이상 정차 또는 주차한 경우 「도로교통법」상 정차 또는 주차 금지의무 위반이 되는지 여부(「도로교통법」 제32조 등 관련)",
+          "caseNo": "11-0149",
           "agency": "법제처",
-          "date": "2022-03-22",
-          "source": "seed"
+          "date": "2011.04.28",
+          "link": "https://www.law.go.kr/LSW/expcInfoP.do?expcSeq=313774",
+          "source": "api"
         },
         {
-          "id": "i-001",
-          "title": "도로교통법 제44조에 따른 음주운전 단속 및 처벌 기준의 적용 범위",
-          "caseNo": "법제처 19-0421",
+          "id": "312229",
+          "title": "경기도 - 「질서위반행위규제법」 제16조에 따른 의견제출을 할 기회를 준 결과 주·정차위반행위를 한 운전자가 밝혀진 경우 시장·군수 등이 과태료를 부과하여야 하는지 여부(「도로교통법」 제32조 등 관련)",
+          "caseNo": "12-0035",
           "agency": "법제처",
-          "date": "2019-09-30",
-          "source": "seed"
+          "date": "2012.02.09",
+          "link": "https://www.law.go.kr/LSW/expcInfoP.do?expcSeq=312229",
+          "source": "api"
         },
         {
-          "id": "i-003",
-          "title": "옥외광고물 등의 관리 법령상 허가·신고 기준의 지자체 위임 가능 여부",
-          "caseNo": "법제처 21-0233",
+          "id": "312532",
+          "title": "경상남도 거제시 - 「지방자치단체를 당사자로 하는 계약에 관한 법률 시행령」 제25조제8호다목(도로교통안전관리공단의 특수법인 여부) 관련",
+          "caseNo": "07-0294",
           "agency": "법제처",
-          "date": "2021-06-18",
-          "source": "seed"
+          "date": "2007.10.01",
+          "link": "https://www.law.go.kr/LSW/expcInfoP.do?expcSeq=312532",
+          "source": "api"
+        },
+        {
+          "id": "311421",
+          "title": "경찰청 - 결격기간의 부여 요건으로서 형의 선고가 없는 경우, 운전면허 취소의 가부(「도로교통법」 제82조제2항제4호 관련)",
+          "caseNo": "09-0115",
+          "agency": "법제처",
+          "date": "2009.05.19",
+          "link": "https://www.law.go.kr/LSW/expcInfoP.do?expcSeq=311421",
+          "source": "api"
+        },
+        {
+          "id": "312530",
+          "title": "경찰청 - 「도로교통법」 제141조(지도 및 감독 등)  관련",
+          "caseNo": "07-0385",
+          "agency": "법제처",
+          "date": "2007.12.28",
+          "link": "https://www.law.go.kr/LSW/expcInfoP.do?expcSeq=312530",
+          "source": "api"
         }
       ],
       "constitutionalCases": [
         {
-          "id": "c-003",
-          "caseNo": "2019헌마1399",
-          "title": "옥외광고물 등 관리법 과태료 부과조항 위헌확인",
-          "date": "2021-03-25",
-          "source": "seed"
+          "id": "137520",
+          "caseNo": "2007헌바66",
+          "title": "구 도로교통법 제101조의 3 등  위헌소원",
+          "date": "2008.10.30",
+          "link": "https://www.law.go.kr/LSW/detcInfoP.do?detcSeq=137520",
+          "source": "api"
+        },
+        {
+          "id": "17670",
+          "caseNo": "2011헌가30",
+          "title": "구 도로교통법 제116조 위헌제청",
+          "date": "2011.11.24",
+          "link": "https://www.law.go.kr/LSW/detcInfoP.do?detcSeq=17670",
+          "source": "api"
+        },
+        {
+          "id": "52663",
+          "caseNo": "2016헌가10",
+          "title": "구 도로교통법 제116조 위헌제청",
+          "date": "2016.10.27",
+          "link": "https://www.law.go.kr/LSW/detcInfoP.do?detcSeq=52663",
+          "source": "api"
+        },
+        {
+          "id": "41665",
+          "caseNo": "2014헌가14",
+          "title": "구 도로교통법 제116조 위헌제청",
+          "date": "2014.11.27",
+          "link": "https://www.law.go.kr/LSW/detcInfoP.do?detcSeq=41665",
+          "source": "api"
+        },
+        {
+          "id": "150765",
+          "caseNo": "2017헌가28",
+          "title": "구 도로교통법 제148조 위헌제청",
+          "date": "2019.04.11",
+          "link": "https://www.law.go.kr/LSW/detcInfoP.do?detcSeq=150765",
+          "source": "api"
         }
       ],
       "ordinances": [
         {
-          "id": "o-003",
-          "name": "부산광역시 주차장 설치 및 관리 조례",
-          "region": "부산광역시",
+          "id": "2019725",
+          "name": "가평군 도로점용공사장 교통소통 대책에 관한 조례",
+          "region": "경기도 가평군",
           "kind": "조례",
-          "enforced": "20220105",
-          "source": "seed"
+          "enforced": "20260420",
+          "link": "https://www.law.go.kr/LSW/ordinInfoP.do?ordinSeq=2124621",
+          "source": "api"
         },
         {
-          "id": "o-001",
-          "name": "서울특별시 옥외광고물 등 관리 조례",
-          "region": "서울특별시",
+          "id": "2020564",
+          "name": "강릉시 주차위반자동차 견인 등 소요비용산정 기준에 관한 조례",
+          "region": "강원특별자치도 강릉시",
           "kind": "조례",
-          "enforced": "20220701",
-          "source": "seed"
+          "enforced": "20230412",
+          "link": "https://www.law.go.kr/LSW/ordinInfoP.do?ordinSeq=1800233",
+          "source": "api"
         },
         {
-          "id": "o-002",
-          "name": "서울특별시 소상공인 보호 및 지원에 관한 조례",
-          "region": "서울특별시",
+          "id": "2236813",
+          "name": "강원특별자치도 도로점용공사장 교통소통대책에 관한 조례",
+          "region": "강원특별자치도",
           "kind": "조례",
-          "enforced": "20210311",
-          "source": "seed"
+          "enforced": "20230927",
+          "link": "https://www.law.go.kr/LSW/ordinInfoP.do?ordinSeq=1862755",
+          "source": "api"
+        },
+        {
+          "id": "2021768",
+          "name": "강진군 주정차 위반차량 견인보관의 소요비용 산정에 관한 조례",
+          "region": "전라남도 강진군",
+          "kind": "조례",
+          "enforced": "20231005",
+          "link": "https://www.law.go.kr/LSW/ordinInfoP.do?ordinSeq=1860741",
+          "source": "api"
+        },
+        {
+          "id": "2022830",
+          "name": "거제시 주차위반자동차 등의 견인에 관한 조례",
+          "region": "경상남도 거제시",
+          "kind": "조례",
+          "enforced": "20161129",
+          "link": "https://www.law.go.kr/LSW/ordinInfoP.do?ordinSeq=1265973",
+          "source": "api"
         }
       ],
       "scores": {
-        "legalFit": 60,
-        "precedentSupport": 50,
-        "judicialSafety": 55,
-        "feasibility": 65
+        "legalFit": 85,
+        "precedentSupport": 70,
+        "judicialSafety": 80,
+        "feasibility": 90
       },
-      "feasibilityScore": 57,
+      "feasibilityScore": 81,
       "contributions": [
         {
           "label": "법적 정합성",
-          "weight": 0.07
-        },
-        {
-          "label": "시행령 실현가능성",
-          "weight": 0.05
+          "weight": 0.24
         },
         {
           "label": "사법 안전성",
-          "weight": 0.03
+          "weight": 0.18
+        },
+        {
+          "label": "시행령 실현가능성",
+          "weight": 0.12
         },
         {
           "label": "유권해석 부합",
-          "weight": 0
+          "weight": 0.08
         }
       ],
       "dataSource": "api"
