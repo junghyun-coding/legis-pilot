@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 배포 데모 사용해 보기
+    url: https://legis-pilot.vercel.app
+    about: 이슈를 올리기 전에 배포된 데모에서 동작을 먼저 확인해 보세요.

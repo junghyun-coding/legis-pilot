@@ -2,6 +2,23 @@
   "name": "legis-pilot",
   "version": "0.1.0",
   "private": true,
+  "description": "국민 입법제안을 국가법령정보와 대조해 법적 타당성을 검토하는 GovTech AI 웹앱",
+  "keywords": [
+    "govtech",
+    "legaltech",
+    "nextjs",
+    "openai",
+    "국가법령정보",
+    "입법제안",
+    "법제처"
+  ],
+  "license": "MIT",
+  "author": "junghyun <junghyunth@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/junghyun-coding/legis-pilot.git"
+  },
+  "homepage": "https://legis-pilot.vercel.app",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
