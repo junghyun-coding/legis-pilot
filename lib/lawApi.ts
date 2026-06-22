@@ -152,17 +152,46 @@ async function fetchInterpretationsFromApi(
   }
 }
 
+// 행정·법률 제안에 흔해 단독으로는 변별력이 없는 광범위어.
+// 이런 단어로 법령해석례를 검색하면 주제 무관 결과가 잡힌다
+// (예: '피해자' → 가정폭력·이태원참사·법난 피해자 해석례). 관련성 기준에서 제외한다.
+const GENERIC_INTERP_TERMS = new Set([
+  "피해자", "피해", "지원", "예방", "보호", "강화", "완화", "신설", "폐지",
+  "개선", "제도", "사업", "관리", "운영", "기준", "대상", "범위", "처벌",
+  "단속", "안전", "정보", "서비스", "시설", "제한", "규정", "절차", "권한",
+]);
+
+// 안건명이 핵심 주제어(구체어) 중 하나라도 포함하면 관련으로 본다.
+function interpMatchesAnchors(title: string, anchors: string[]): boolean {
+  const lower = title.toLowerCase();
+  return anchors.some((a) => lower.includes(a));
+}
+
 /**
  * 법령해석례 조회. 후보 검색어(주제어→법령도메인어→키워드)를 순차 시도해
  * 실연동 결과를 찾는다. 모두 0건이면 가짜 데이터 대신 빈 값(섹션 숨김) — 정직성 우선.
+ *
+ * 관련성 게이트: 법령해석례 검색은 안건명·본문을 폭넓게 매칭하므로, '피해자' 같은
+ * 일반어로 폴백되면 주제 무관 해석례가 통째로 잡힌다. anchorTerms(제안의 구체적
+ * 주제어)와 안건명이 실제로 부합하는 항목만 채택하고, 부합이 0이면 다음 후보로 넘긴다.
  */
 export async function getInterpretations(
   queries: string[],
+  anchorTerms: string[] = [],
 ): Promise<{ items: InterpretationHit[]; source: "api" | "seed" }> {
+  // 변별력 있는 구체어만 관련성 기준으로 남긴다(일반어는 노이즈 매칭 유발).
+  const anchors = [...new Set(anchorTerms.map((t) => t.trim().toLowerCase()))]
+    .filter((t) => t.length >= 2 && !GENERIC_INTERP_TERMS.has(t));
+
   for (const q of queries) {
     if (!q) continue;
     const apiItems = await fetchInterpretationsFromApi(q);
-    if (apiItems && apiItems.length > 0) return { items: apiItems, source: "api" };
+    if (!apiItems || apiItems.length === 0) continue;
+    // anchors 가 있으면 안건명이 구체어와 맞는 항목만. 통과 0이면(일반어 노이즈) 다음 후보로.
+    const relevant = anchors.length
+      ? apiItems.filter((it) => interpMatchesAnchors(it.title, anchors))
+      : apiItems;
+    if (relevant.length > 0) return { items: relevant, source: "api" };
   }
   return { items: [], source: "api" };
 }
