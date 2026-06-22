@@ -37,7 +37,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "ministry": "국토교통부",
           "promulgated": "20251001",
           "enforced": "20260102",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=law&MST=276947&type=HTML&mobileYn=&efYd=20260102",
+          "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=276947",
           "source": "api"
         },
         {
@@ -46,7 +46,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "ministry": "경찰청",
           "promulgated": "20251230",
           "enforced": "20260402",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=law&MST=281875&type=HTML&mobileYn=&efYd=20260402",
+          "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=281875",
           "source": "api"
         },
         {
@@ -55,7 +55,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "ministry": "경찰청",
           "promulgated": "20250318",
           "enforced": "20260319",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=law&MST=269989&type=HTML&mobileYn=&efYd=20260319",
+          "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=269989",
           "source": "api"
         },
         {
@@ -64,7 +64,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "ministry": "경찰청",
           "promulgated": "20260401",
           "enforced": "20260402",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=law&MST=285317&type=HTML&mobileYn=&efYd=20260402",
+          "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=285317",
           "source": "api"
         },
         {
@@ -73,7 +73,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "ministry": "경찰청",
           "promulgated": "20240130",
           "enforced": "20240731",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=law&MST=259489&type=HTML&mobileYn=&efYd=20240731",
+          "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=259489",
           "source": "api"
         }
       ],
@@ -84,7 +84,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "caseNo": "14-0687",
           "agency": "법제처",
           "date": "2014.12.05",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=expc&ID=314839&type=HTML&mobileYn=",
+          "link": "https://www.law.go.kr/LSW/expcInfoP.do?expcSeq=314839",
           "source": "api"
         },
         {
@@ -93,7 +93,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "caseNo": "17-0233",
           "agency": "법제처",
           "date": "2017.07.03",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=expc&ID=331141&type=HTML&mobileYn=",
+          "link": "https://www.law.go.kr/LSW/expcInfoP.do?expcSeq=331141",
           "source": "api"
         },
         {
@@ -102,7 +102,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "caseNo": "26-0296",
           "agency": "법제처",
           "date": "2026.05.06",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=expc&ID=343163&type=HTML&mobileYn=",
+          "link": "https://www.law.go.kr/LSW/expcInfoP.do?expcSeq=343163",
           "source": "api"
         },
         {
@@ -111,7 +111,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "caseNo": "26-0309",
           "agency": "법제처",
           "date": "2026.05.06",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=expc&ID=343161&type=HTML&mobileYn=",
+          "link": "https://www.law.go.kr/LSW/expcInfoP.do?expcSeq=343161",
           "source": "api"
         },
         {
@@ -120,7 +120,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "caseNo": "16-0251",
           "agency": "법제처",
           "date": "2016.06.27",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=expc&ID=327941&type=HTML&mobileYn=",
+          "link": "https://www.law.go.kr/LSW/expcInfoP.do?expcSeq=327941",
           "source": "api"
         }
       ],
@@ -130,7 +130,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "caseNo": "2002헌마293",
           "title": "무작위음주운전단속 위헌확인",
           "date": "2004.01.29",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=detc&ID=134605&type=HTML&mobileYn=",
+          "link": "https://www.law.go.kr/LSW/detcInfoP.do?detcSeq=134605",
           "source": "api"
         },
         {
@@ -138,7 +138,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "caseNo": "2024헌마814",
           "title": "음주운전 삼진아웃제 적용 취소",
           "date": "2024.10.02",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=detc&ID=193763&type=HTML&mobileYn=",
+          "link": "https://www.law.go.kr/LSW/detcInfoP.do?detcSeq=193763",
           "source": "api"
         }
       ],
@@ -149,7 +149,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "region": "광주광역시 남구",
           "kind": "조례",
           "enforced": "20231229",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=ordin&MST=1894029&type=HTML&mobileYn=",
+          "link": "https://www.law.go.kr/LSW/ordinInfoP.do?ordinSeq=1894029",
           "source": "api"
         },
         {
@@ -158,7 +158,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "region": "광주광역시 서구",
           "kind": "조례",
           "enforced": "20251111",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=ordin&MST=2084207&type=HTML&mobileYn=",
+          "link": "https://www.law.go.kr/LSW/ordinInfoP.do?ordinSeq=2084207",
           "source": "api"
         },
         {
@@ -167,7 +167,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "region": "경기도 광주시",
           "kind": "조례",
           "enforced": "20251218",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=ordin&MST=2093997&type=HTML&mobileYn=",
+          "link": "https://www.law.go.kr/LSW/ordinInfoP.do?ordinSeq=2093997",
           "source": "api"
         },
         {
@@ -176,7 +176,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "region": "인천광역시 남동구",
           "kind": "조례",
           "enforced": "20250512",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=ordin&MST=2036241&type=HTML&mobileYn=",
+          "link": "https://www.law.go.kr/LSW/ordinInfoP.do?ordinSeq=2036241",
           "source": "api"
         },
         {
@@ -185,7 +185,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "region": "경기도 남양주시",
           "kind": "조례",
           "enforced": "20231219",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=ordin&MST=1883319&type=HTML&mobileYn=",
+          "link": "https://www.law.go.kr/LSW/ordinInfoP.do?ordinSeq=1883319",
           "source": "api"
         }
       ],
@@ -250,7 +250,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "ministry": "국토교통부",
           "promulgated": "20251001",
           "enforced": "20260102",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=law&MST=276947&type=HTML&mobileYn=&efYd=20260102",
+          "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=276947",
           "source": "api"
         },
         {
@@ -259,7 +259,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "ministry": "경찰청",
           "promulgated": "20251230",
           "enforced": "20260402",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=law&MST=281875&type=HTML&mobileYn=&efYd=20260402",
+          "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=281875",
           "source": "api"
         },
         {
@@ -268,7 +268,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "ministry": "경찰청",
           "promulgated": "20250318",
           "enforced": "20260319",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=law&MST=269989&type=HTML&mobileYn=&efYd=20260319",
+          "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=269989",
           "source": "api"
         },
         {
@@ -277,7 +277,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "ministry": "경찰청",
           "promulgated": "20260401",
           "enforced": "20260402",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=law&MST=285317&type=HTML&mobileYn=&efYd=20260402",
+          "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=285317",
           "source": "api"
         },
         {
@@ -286,7 +286,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "ministry": "경찰청",
           "promulgated": "20240130",
           "enforced": "20240731",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=law&MST=259489&type=HTML&mobileYn=&efYd=20240731",
+          "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=259489",
           "source": "api"
         }
       ],
@@ -297,7 +297,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "caseNo": "17-0243",
           "agency": "법제처",
           "date": "2017.07.13",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=expc&ID=330995&type=HTML&mobileYn=",
+          "link": "https://www.law.go.kr/LSW/expcInfoP.do?expcSeq=330995",
           "source": "api"
         },
         {
@@ -306,7 +306,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "caseNo": "21-0639",
           "agency": "법제처",
           "date": "2021.10.20",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=expc&ID=332327&type=HTML&mobileYn=",
+          "link": "https://www.law.go.kr/LSW/expcInfoP.do?expcSeq=332327",
           "source": "api"
         }
       ],
@@ -318,7 +318,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "region": "경기도 가평군",
           "kind": "조례",
           "enforced": "20211227",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=ordin&MST=1656551&type=HTML&mobileYn=",
+          "link": "https://www.law.go.kr/LSW/ordinInfoP.do?ordinSeq=1656551",
           "source": "api"
         },
         {
@@ -327,7 +327,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "region": "강원특별자치도",
           "kind": "조례",
           "enforced": "20230611",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=ordin&MST=1819581&type=HTML&mobileYn=",
+          "link": "https://www.law.go.kr/LSW/ordinInfoP.do?ordinSeq=1819581",
           "source": "api"
         },
         {
@@ -336,7 +336,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "region": "경상남도 거제시",
           "kind": "조례",
           "enforced": "20241121",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=ordin&MST=1988047&type=HTML&mobileYn=",
+          "link": "https://www.law.go.kr/LSW/ordinInfoP.do?ordinSeq=1988047",
           "source": "api"
         },
         {
@@ -345,7 +345,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "region": "경상남도 거창군",
           "kind": "조례",
           "enforced": "20190403",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=ordin&MST=1389931&type=HTML&mobileYn=",
+          "link": "https://www.law.go.kr/LSW/ordinInfoP.do?ordinSeq=1389931",
           "source": "api"
         },
         {
@@ -354,7 +354,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "region": "충청남도 계룡시",
           "kind": "조례",
           "enforced": "20170710",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=ordin&MST=1295017&type=HTML&mobileYn=",
+          "link": "https://www.law.go.kr/LSW/ordinInfoP.do?ordinSeq=1295017",
           "source": "api"
         }
       ],
@@ -415,7 +415,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "ministry": "행정안전부",
           "promulgated": "20250814",
           "enforced": "20260215",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=law&MST=273367&type=HTML&mobileYn=&efYd=20260215",
+          "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=273367",
           "source": "api"
         },
         {
@@ -424,7 +424,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "ministry": "행정안전부",
           "promulgated": "20260127",
           "enforced": "20260127",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=law&MST=282903&type=HTML&mobileYn=&efYd=20260127",
+          "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=282903",
           "source": "api"
         }
       ],
@@ -477,7 +477,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "region": "경기도 가평군",
           "kind": "조례",
           "enforced": "20260420",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=ordin&MST=2124579&type=HTML&mobileYn=",
+          "link": "https://www.law.go.kr/LSW/ordinInfoP.do?ordinSeq=2124579",
           "source": "api"
         },
         {
@@ -486,7 +486,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "region": "경기도",
           "kind": "조례",
           "enforced": "20250101",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=ordin&MST=2007173&type=HTML&mobileYn=",
+          "link": "https://www.law.go.kr/LSW/ordinInfoP.do?ordinSeq=2007173",
           "source": "api"
         },
         {
@@ -495,7 +495,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "region": "경기도",
           "kind": "조례",
           "enforced": "20250312",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=ordin&MST=2021095&type=HTML&mobileYn=",
+          "link": "https://www.law.go.kr/LSW/ordinInfoP.do?ordinSeq=2021095",
           "source": "api"
         },
         {
@@ -504,7 +504,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "region": "경상북도",
           "kind": "조례",
           "enforced": "20260108",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=ordin&MST=2106903&type=HTML&mobileYn=",
+          "link": "https://www.law.go.kr/LSW/ordinInfoP.do?ordinSeq=2106903",
           "source": "api"
         },
         {
@@ -513,7 +513,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "region": "전라남도 곡성군",
           "kind": "조례",
           "enforced": "20250714",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=ordin&MST=2059483&type=HTML&mobileYn=",
+          "link": "https://www.law.go.kr/LSW/ordinInfoP.do?ordinSeq=2059483",
           "source": "api"
         }
       ],
@@ -578,7 +578,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "ministry": "국토교통부",
           "promulgated": "20251001",
           "enforced": "20260102",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=law&MST=276947&type=HTML&mobileYn=&efYd=20260102",
+          "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=276947",
           "source": "api"
         },
         {
@@ -587,7 +587,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "ministry": "경찰청",
           "promulgated": "20251230",
           "enforced": "20260402",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=law&MST=281875&type=HTML&mobileYn=&efYd=20260402",
+          "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=281875",
           "source": "api"
         },
         {
@@ -596,7 +596,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "ministry": "경찰청",
           "promulgated": "20250318",
           "enforced": "20260319",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=law&MST=269989&type=HTML&mobileYn=&efYd=20260319",
+          "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=269989",
           "source": "api"
         },
         {
@@ -605,7 +605,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "ministry": "경찰청",
           "promulgated": "20260401",
           "enforced": "20260402",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=law&MST=285317&type=HTML&mobileYn=&efYd=20260402",
+          "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=285317",
           "source": "api"
         },
         {
@@ -614,7 +614,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "ministry": "경찰청",
           "promulgated": "20240130",
           "enforced": "20240731",
-          "link": "https://www.law.go.kr/DRF/lawService.do?OC=sapphire_5&target=law&MST=259489&type=HTML&mobileYn=&efYd=20240731",
+          "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=259489",
           "source": "api"
         }
       ],

@@ -24,7 +24,10 @@ export default function DashboardPage() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   useEffect(() => {
+    // localStorage 는 클라이언트에서만 읽히므로 mount 후 1회 로드한다(SSR 하이드레이션 안전).
+    // 이 1회 동기화는 cascading-render 우려 대상이 아니라 규칙을 의도적으로 끈다.
     const list = getProposals();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setProposals(list);
     if (list.length) setSelectedId(list[0].id);
   }, []);
