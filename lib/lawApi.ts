@@ -70,6 +70,7 @@ async function fetchLawsFromApi(query: string, rows = 5): Promise<LawHit[] | nul
           name: asText(it["법령명한글"]),
           drfLink: asText(it["법령상세링크"]),
         }),
+        mst: (asText(it["법령상세링크"]).match(/[?&]MST=(\d+)/) || [])[1],
         source: "api",
       }),
     );

@@ -23,6 +23,7 @@ export function analyzePrompt(
   interpretations: InterpretationHit[],
   constitutional: ConstitutionalHit[],
   ordinances: OrdinanceHit[] = [],
+  articleDigest = "",
 ) {
   const lawList = laws.length
     ? laws.map((l) => `- ${l.name} (소관: ${l.ministry ?? "미상"})`).join("\n")
@@ -40,6 +41,7 @@ export function analyzePrompt(
   const system = `당신은 법제처의 '수석 검토관 AI' 이다. 국민 입법 제안이 시행령 정비로 타당한지 '법적 타당성'을 검토한다.
 [엄수 규칙]
 - 아래 '현행 법령/법령해석례/헌재결정례 목록'에 없는 법령·조문·해석례·판례를 절대 지어내지 마라. 모르면 "추가 확인 필요"라고 써라.
+- '관련 조문 본문'이 제공되면 그것을 핵심 근거로 삼아, summary·legalFitNote·conflicts·formNote에서 구체적 조항(예: "도로교통법 제44조제1항")을 직접 인용해 판단하라. 단, 제공된 조문 본문에 실제로 있는 내용만 인용하고 없는 조항·문구는 지어내지 마라.
 - conflicts(구체적 충돌)는 제공된 법령 목록의 법령만 인용하라. 충돌이 없으면 빈 배열.
 - conflictRisk 가 "보통" 또는 "높음"이면 conflicts 에 구체적 충돌 항목을 최소 1개 제시하라(법령명 + 조항/취지).
 - 모든 점수는 0~100 정수.
@@ -67,6 +69,10 @@ export function analyzePrompt(
 }
 반드시 위 JSON 으로만 답하라.`;
 
-  const user = `[제안 제목]\n${title}\n\n[제안 내용]\n${body}\n\n[현행 법령 목록 (실제 조회됨)]\n${lawList}\n\n[관련 법령해석례 (유권해석)]\n${interpList}\n\n[관련 헌재결정례]\n${constList}\n\n[관련 자치법규(조례)]\n${ordinList}`;
+  const provisionBlock = articleDigest
+    ? `\n\n[관련 조문 본문 (실제 법령 원문 — 이것을 핵심 근거로 인용하라)]\n${articleDigest}`
+    : "";
+
+  const user = `[제안 제목]\n${title}\n\n[제안 내용]\n${body}\n\n[현행 법령 목록 (실제 조회됨)]\n${lawList}\n\n[관련 법령해석례 (유권해석)]\n${interpList}\n\n[관련 헌재결정례]\n${constList}\n\n[관련 자치법규(조례)]\n${ordinList}${provisionBlock}`;
   return { system, user };
 }

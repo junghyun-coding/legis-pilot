@@ -19,6 +19,7 @@ export interface LawHit {
   promulgated?: string;
   enforced?: string;
   link?: string;
+  mst?: string; // 법령 본문(조문) 조회용 MST — 조문 RAG에 사용
   source: "api" | "seed";
 }
 

@@ -1,8 +1,9 @@
 import type { Proposal } from "@/types";
 
 // 대시보드 초기 표시용 제안 4건.
-// 실제 /api/analyze(국가법령정보 4종 실연동) 결과를 고정 스냅샷으로 저장한 것이라
-// 인용 법령·해석례·헌재·조례가 모두 실존 데이터이며 law.go.kr 공개뷰어 원문으로 연결된다.
+// 실제 /api/analyze(국가법령정보 4종 실연동 + 조문 본문 RAG, gpt-4o 분석) 결과를
+// 고정 스냅샷으로 저장한 것이라 인용 법령·해석례·헌재·조례가 모두 실존 데이터이며
+// law.go.kr 공개뷰어 원문으로 연결되고, 검토 의견은 실제 조문을 근거로 작성된다.
 export const SEED_PROPOSALS: Proposal[] = [
   {
     "id": "seed-1",
@@ -19,18 +20,18 @@ export const SEED_PROPOSALS: Proposal[] = [
         "생계형 운전자"
       ],
       "verdict": "정비 부적합",
-      "summary": "음주운전 초범에 대한 처벌 완화 제안은 도로교통법의 기본 원칙과 충돌할 가능성이 높아 법적 타당성이 낮습니다.",
-      "recommendation": "해당 제안은 법률 개정이 필요하므로, 소관 부처와의 협의를 권고합니다.",
-      "formNote": "음주운전 처벌 완화는 법률에 명시된 사항으로, 시행령 정비만으로는 실현이 어렵습니다.",
-      "legalFitNote": "도로교통법 제44조는 음주운전의 처벌을 규정하고 있어, 초범에 대한 처벌 완화는 법적 정합성을 결여합니다.",
+      "summary": "음주운전 초범 처벌 완화 제안은 도로교통법의 취지와 상충될 수 있으며, 법률 개정이 필요할 가능성이 높습니다.",
+      "recommendation": "소관 부처인 경찰청과 협의하여 법률 개정 필요성을 검토해야 합니다.",
+      "formNote": "음주운전 처벌 완화는 도로교통법 제93조에 명시된 운전면허 취소 및 정지 기준과 관련이 있어 시행령 정비만으로는 실현하기 어렵고, 법률 개정이 필요합니다.",
+      "legalFitNote": "도로교통법 제93조는 음주운전 시 운전면허 취소를 명시하고 있어, 초범 처벌 완화는 법률의 취지와 상충될 수 있습니다.",
       "conflictRisk": "높음",
       "conflicts": [
         {
           "law": "도로교통법",
-          "detail": "제44조에 따라 음주운전은 처벌 대상이며, 초범에 대한 처벌 완화는 법령의 취지와 상충합니다."
+          "detail": "제93조는 음주운전 시 운전면허 취소를 명시하고 있어, 초범 처벌 완화는 법률의 취지와 상충될 수 있습니다."
         }
       ],
-      "adminNote": "행정적으로도 음주운전 처벌 완화는 집행의 일관성을 해칠 수 있습니다.",
+      "adminNote": "음주운전 처벌 완화는 집행의 형평성 문제를 야기할 수 있으며, 행정 부담이 증가할 수 있습니다.",
       "relatedLaws": [
         {
           "id": "001638",
@@ -39,6 +40,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "promulgated": "20251230",
           "enforced": "20260402",
           "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=281875",
+          "mst": "281875",
           "source": "api"
         },
         {
@@ -48,6 +50,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "promulgated": "20260609",
           "enforced": "20260609",
           "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=286789",
+          "mst": "286789",
           "source": "api"
         },
         {
@@ -57,6 +60,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "promulgated": "20260401",
           "enforced": "20260402",
           "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=285317",
+          "mst": "285317",
           "source": "api"
         },
         {
@@ -66,6 +70,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "promulgated": "20240130",
           "enforced": "20240731",
           "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=259489",
+          "mst": "259489",
           "source": "api"
         }
       ],
@@ -182,23 +187,23 @@ export const SEED_PROPOSALS: Proposal[] = [
         }
       ],
       "scores": {
-        "legalFit": 20,
-        "precedentSupport": 0,
-        "judicialSafety": 30,
+        "legalFit": 30,
+        "precedentSupport": 20,
+        "judicialSafety": 25,
         "feasibility": 20
       },
-      "feasibilityScore": 19,
+      "feasibilityScore": 25,
       "contributions": [
         {
+          "label": "사법 안전성",
+          "weight": -0.15
+        },
+        {
           "label": "법적 정합성",
-          "weight": -0.21
+          "weight": -0.14
         },
         {
           "label": "유권해석 부합",
-          "weight": -0.2
-        },
-        {
-          "label": "사법 안전성",
           "weight": -0.12
         },
         {
@@ -222,19 +227,19 @@ export const SEED_PROPOSALS: Proposal[] = [
         "심야 시간대",
         "통학 차량"
       ],
-      "verdict": "정비 부적합",
-      "summary": "어린이 보호구역의 심야 시간대 속도제한 완화 제안은 도로교통법의 기본 취지와 충돌할 가능성이 있으며, 법적 정합성이 낮아 타당성이 부족합니다.",
-      "recommendation": "권고 (소관 부처와 협의하여 대안 모색 필요)",
-      "formNote": "법률 개정이 필요할 것으로 보이며, 시행령 정비만으로는 실현이 어려울 것입니다.",
-      "legalFitNote": "도로교통법 제12조는 어린이 보호구역 내에서의 안전을 강조하고 있어, 심야 시간대 속도제한 완화는 법적 정합성이 낮습니다.",
-      "conflictRisk": "높음",
+      "verdict": "조건부 검토",
+      "summary": "어린이보호구역의 심야 시간대 속도제한 완화 제안은 도로교통법의 취지와 일부 충돌할 수 있으나, 시행령 정비로 조정 가능성이 있다.",
+      "recommendation": "소관 부처인 경찰청과 협의하여 시행령 개정 가능성을 검토할 것을 권고합니다.",
+      "formNote": "입법형식 판단: 도로교통법 시행령의 개정을 통해 심야 시간대 속도제한 완화가 가능할 수 있습니다.",
+      "legalFitNote": "도로교통법 제12조는 어린이 보호구역 내 속도제한을 규정하고 있으며, 심야 시간대 완화는 시행령을 통해 조정할 수 있습니다.",
+      "conflictRisk": "보통",
       "conflicts": [
         {
           "law": "도로교통법",
-          "detail": "제12조에 따라 어린이 보호구역 내에서의 속도제한 규정과 충돌할 가능성이 있음"
+          "detail": "제12조의 어린이 보호구역 내 속도제한 규정과 충돌 가능성"
         }
       ],
-      "adminNote": "행정적으로 어린이 보호구역의 안전성을 저해할 수 있는 우려가 있어 집행에 어려움이 있을 수 있습니다.",
+      "adminNote": "심야 시간대 속도제한 완화는 교통안전 관리에 있어 행정 부담을 줄일 수 있습니다.",
       "relatedLaws": [
         {
           "id": "001638",
@@ -243,6 +248,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "promulgated": "20251230",
           "enforced": "20260402",
           "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=281875",
+          "mst": "281875",
           "source": "api"
         },
         {
@@ -252,6 +258,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "promulgated": "20260609",
           "enforced": "20260609",
           "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=286789",
+          "mst": "286789",
           "source": "api"
         },
         {
@@ -261,6 +268,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "promulgated": "20260401",
           "enforced": "20260402",
           "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=285317",
+          "mst": "285317",
           "source": "api"
         },
         {
@@ -270,6 +278,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "promulgated": "20240130",
           "enforced": "20240731",
           "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=259489",
+          "mst": "259489",
           "source": "api"
         }
       ],
@@ -383,28 +392,28 @@ export const SEED_PROPOSALS: Proposal[] = [
         }
       ],
       "scores": {
-        "legalFit": 30,
-        "precedentSupport": 0,
-        "judicialSafety": 40,
-        "feasibility": 20
+        "legalFit": 60,
+        "precedentSupport": 50,
+        "judicialSafety": 50,
+        "feasibility": 70
       },
-      "feasibilityScore": 26,
+      "feasibilityScore": 57,
       "contributions": [
         {
-          "label": "유권해석 부합",
-          "weight": -0.2
-        },
-        {
           "label": "법적 정합성",
-          "weight": -0.14
+          "weight": 0.07
         },
         {
           "label": "시행령 실현가능성",
-          "weight": -0.09
+          "weight": 0.06
         },
         {
           "label": "사법 안전성",
-          "weight": -0.06
+          "weight": 0
+        },
+        {
+          "label": "유권해석 부합",
+          "weight": 0
         }
       ],
       "dataSource": "api"
@@ -425,13 +434,13 @@ export const SEED_PROPOSALS: Proposal[] = [
         "지원"
       ],
       "verdict": "정비 권고",
-      "summary": "소상공인 간판 교체 비용 지원은 옥외광고물법의 취지에 부합하며, 시행령 정비로 실현 가능성이 높습니다.",
-      "recommendation": "행정안전부와 협의하여 구체적인 지원 방안을 마련할 것을 권고합니다.",
-      "formNote": "이 제안은 시행령 정비로 가능하며, 법률 개정이 필요하지 않습니다.",
-      "legalFitNote": "옥외광고물법은 광고물의 설치 및 관리에 관한 규정을 두고 있으며, 소상공인 지원을 위한 시행령 정비는 법의 취지에 부합합니다.",
+      "summary": "골목상권 소상공인의 간판 교체 비용 지원은 옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 법률 시행령 제4조의3에 따라 정비시범구역에서 예산 범위 내에서 지원할 수 있는 근거가 있다.",
+      "recommendation": "행정안전부와 협의하여 시행령 내 지원 조항을 활용한 구체적 지원 방안을 마련할 것을 권고한다.",
+      "formNote": "시행령 제4조의3에 따라 정비시범구역에서 간판 교체 비용을 지원할 수 있으므로, 시행령 정비로 실현 가능하다.",
+      "legalFitNote": "옥외광고물 등의 관리와 옥외광고산업 진흥에 관한 법률 시행령 제4조의3 제3항에 따라 정비시범구역에서 광고물의 제작비용과 설치비용을 지원할 수 있는 근거가 있다.",
       "conflictRisk": "낮음",
       "conflicts": [],
-      "adminNote": "소상공인 지원을 위한 행정적 부담이 증가할 수 있으나, 지역 경제 활성화에 기여할 수 있습니다.",
+      "adminNote": "행정안전부와 지방자치단체의 협력을 통해 예산 확보 및 지원 절차 마련이 필요하다.",
       "relatedLaws": [
         {
           "id": "001020",
@@ -440,6 +449,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "promulgated": "20250814",
           "enforced": "20260215",
           "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=273367",
+          "mst": "273367",
           "source": "api"
         },
         {
@@ -449,6 +459,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "promulgated": "20260127",
           "enforced": "20260127",
           "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=282903",
+          "mst": "282903",
           "source": "api"
         }
       ],
@@ -630,13 +641,13 @@ export const SEED_PROPOSALS: Proposal[] = [
         "상권 보호"
       ],
       "verdict": "정비 권고",
-      "summary": "상가 밀집지역의 불법 주정차 단속 강화는 도로교통법에 근거하여 가능하나, 구체적인 단속 기준 및 절차에 대한 시행령 정비가 필요할 것으로 보입니다.",
-      "recommendation": "경찰청과 협의하여 시행령 정비 방안을 모색할 것을 권고합니다.",
-      "formNote": "이 제안은 시행령 정비로 가능하며, 법률 개정은 필요하지 않습니다.",
-      "legalFitNote": "도로교통법 제32조에 따라 불법 주정차에 대한 단속이 가능하므로 법적 정합성이 높습니다.",
+      "summary": "상가 밀집지역의 불법 주정차 단속 강화를 위한 제안은 도로교통법 및 관련 시행령에 따라 시행령 정비로 실현 가능성이 높습니다.",
+      "recommendation": "경찰청과 협의하여 시행령 정비를 통한 단속 강화 방안을 검토할 것을 권고합니다.",
+      "formNote": "입법형식 판단: 도로교통법 시행령의 정비를 통해 단속 강화가 가능합니다.",
+      "legalFitNote": "도로교통법 제32조는 주차 및 정차 금지 구역을 규정하고 있으며, 시행령을 통해 단속 기준을 강화할 수 있습니다.",
       "conflictRisk": "낮음",
       "conflicts": [],
-      "adminNote": "단속 강화에 따른 행정 부담이 증가할 수 있으나, 상권 보호를 위한 필요성이 있습니다.",
+      "adminNote": "단속 강화에 따른 행정 부담이 증가할 수 있으나, 상권 보호를 위한 필요 조치로 판단됩니다.",
       "relatedLaws": [
         {
           "id": "001638",
@@ -645,6 +656,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "promulgated": "20251230",
           "enforced": "20260402",
           "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=281875",
+          "mst": "281875",
           "source": "api"
         },
         {
@@ -654,6 +666,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "promulgated": "20260609",
           "enforced": "20260609",
           "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=286789",
+          "mst": "286789",
           "source": "api"
         },
         {
@@ -663,6 +676,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "promulgated": "20260401",
           "enforced": "20260402",
           "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=285317",
+          "mst": "285317",
           "source": "api"
         },
         {
@@ -672,6 +686,7 @@ export const SEED_PROPOSALS: Proposal[] = [
           "promulgated": "20240130",
           "enforced": "20240731",
           "link": "https://www.law.go.kr/lsInfoP.do?lsiSeq=259489",
+          "mst": "259489",
           "source": "api"
         }
       ],
