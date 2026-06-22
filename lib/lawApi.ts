@@ -1,5 +1,7 @@
 import { XMLParser } from "fast-xml-parser";
 import type { LawHit, InterpretationHit, ConstitutionalHit, OrdinanceHit } from "@/types";
+import { buildPublicLink } from "@/lib/lawLink";
+import { rerankLaws } from "@/lib/lawRerank";
 import { matchSeedLaws } from "@/data/laws";
 import { matchInterpretations } from "@/data/interpretations";
 import { matchConstitutional } from "@/data/constitutional";
@@ -29,11 +31,6 @@ function asText(v: unknown): string {
   return String(v).trim();
 }
 
-function toAbsoluteLink(raw: unknown): string | undefined {
-  const s = asText(raw);
-  if (!s) return undefined;
-  return s.startsWith("http") ? s : `https://www.law.go.kr${s}`;
-}
 
 /**
  * 국가법령정보 공유 서비스에서 query 관련 현행 법령 목록을 조회한다.
@@ -71,7 +68,11 @@ async function fetchLawsFromApi(query: string, rows = 5): Promise<LawHit[] | nul
         ministry: asText(it["소관부처명"]) || undefined,
         promulgated: asText(it["공포일자"]) || undefined,
         enforced: asText(it["시행일자"]) || undefined,
-        link: toAbsoluteLink(it["법령상세링크"]),
+        link: buildPublicLink({
+          target: "law",
+          name: asText(it["법령명한글"]),
+          drfLink: asText(it["법령상세링크"]),
+        }),
         source: "api",
       }),
     );
@@ -89,10 +90,12 @@ async function fetchLawsFromApi(query: string, rows = 5): Promise<LawHit[] | nul
 export async function getRelatedLaws(
   query: string,
   fallbackText: string,
+  keywords: string[] = [],
 ): Promise<{ laws: LawHit[]; source: "api" | "seed" }> {
   const apiLaws = await fetchLawsFromApi(query);
   if (apiLaws && apiLaws.length > 0) {
-    return { laws: apiLaws, source: "api" };
+    // API 결과에 한해 결정적 재랭킹/노이즈 강등 적용. 시드 폴백은 비파괴.
+    return { laws: rerankLaws(apiLaws, query, keywords), source: "api" };
   }
   return { laws: matchSeedLaws(fallbackText), source: "seed" };
 }
@@ -137,7 +140,10 @@ async function fetchInterpretationsFromApi(
         caseNo: asText(it["안건번호"]) || undefined,
         agency: asText(it["회신기관명"]) || undefined,
         date: asText(it["회신일자"]) || undefined,
-        link: toAbsoluteLink(it["법령해석례상세링크"]),
+        link: buildPublicLink({
+          target: "expc",
+          id: asText(it["법령해석례일련번호"]),
+        }),
         source: "api",
       }),
     );
@@ -204,7 +210,10 @@ async function fetchConstitutionalFromApi(
         caseNo: asText(it["사건번호"]),
         title: asText(it["사건명"]),
         date: asText(it["종국일자"]) || undefined,
-        link: toAbsoluteLink(it["헌재결정례상세링크"]),
+        link: buildPublicLink({
+          target: "detc",
+          id: asText(it["헌재결정례일련번호"]),
+        }),
         source: "api",
       }),
     );
@@ -271,7 +280,10 @@ async function fetchOrdinancesFromApi(
         region: asText(it["지자체기관명"]) || undefined,
         kind: asText(it["자치법규종류"]) || undefined,
         enforced: asText(it["시행일자"]) || undefined,
-        link: toAbsoluteLink(it["자치법규상세링크"]),
+        link: buildPublicLink({
+          target: "ordin",
+          drfLink: asText(it["자치법규상세링크"]),
+        }),
         source: "api",
       }),
     );

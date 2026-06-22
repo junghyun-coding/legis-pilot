@@ -23,7 +23,10 @@ export async function callJSON<T>(system: string, user: string): Promise<T | nul
   try {
     const res = await c.chat.completions.create({
       model: MODEL,
-      temperature: 0.2,
+      // 결정성: 동일 제안은 동일 판정이 나오도록 temperature 0 + 고정 seed.
+      // (입법 검토 도구는 재현 가능해야 한다 — 경계 점수에서 판정이 흔들리면 신뢰 붕괴)
+      temperature: 0,
+      seed: 42,
       response_format: { type: "json_object" },
       messages: [
         { role: "system", content: system },

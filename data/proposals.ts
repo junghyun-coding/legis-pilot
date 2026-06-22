@@ -435,7 +435,6 @@ export const SEED_PROPOSALS: Proposal[] = [
           "caseNo": "법제처 21-0233",
           "agency": "법제처",
           "date": "2021-06-18",
-          "link": "https://www.law.go.kr/expc/",
           "source": "seed"
         },
         {
@@ -444,7 +443,6 @@ export const SEED_PROPOSALS: Proposal[] = [
           "caseNo": "법제처 20-0115",
           "agency": "법제처",
           "date": "2020-04-12",
-          "link": "https://www.law.go.kr/expc/",
           "source": "seed"
         },
         {
@@ -453,7 +451,6 @@ export const SEED_PROPOSALS: Proposal[] = [
           "caseNo": "법제처 22-0087",
           "agency": "법제처",
           "date": "2022-03-22",
-          "link": "https://www.law.go.kr/expc/",
           "source": "seed"
         }
       ],
@@ -463,7 +460,6 @@ export const SEED_PROPOSALS: Proposal[] = [
           "caseNo": "2019헌마1399",
           "title": "옥외광고물 등 관리법 과태료 부과조항 위헌확인",
           "date": "2021-03-25",
-          "link": "https://www.law.go.kr/detc/",
           "source": "seed"
         },
         {
@@ -471,7 +467,6 @@ export const SEED_PROPOSALS: Proposal[] = [
           "caseNo": "2020헌바471",
           "title": "식품위생법상 영업정지 처분 근거조항 위헌소원",
           "date": "2021-11-25",
-          "link": "https://www.law.go.kr/detc/",
           "source": "seed"
         }
       ],
@@ -555,7 +550,7 @@ export const SEED_PROPOSALS: Proposal[] = [
     "title": "상가 밀집지역 불법 주정차 단속을 강화해 주세요",
     "body": "가게 앞에 불법 주차된 차량 때문에 손님이 못 옵니다. 상권 보호를 위해 단속을 강화해 주세요.",
     "submittedAt": "2026-05-29T08:05:00.000Z",
-    "status": "검토중",
+    "status": "검토완료",
     "report": {
       "keywords": [
         "상가 밀집지역",
@@ -630,7 +625,6 @@ export const SEED_PROPOSALS: Proposal[] = [
           "caseNo": "법제처 22-0087",
           "agency": "법제처",
           "date": "2022-03-22",
-          "link": "https://www.law.go.kr/expc/",
           "source": "seed"
         },
         {
@@ -639,7 +633,6 @@ export const SEED_PROPOSALS: Proposal[] = [
           "caseNo": "법제처 19-0421",
           "agency": "법제처",
           "date": "2019-09-30",
-          "link": "https://www.law.go.kr/expc/",
           "source": "seed"
         },
         {
@@ -648,7 +641,6 @@ export const SEED_PROPOSALS: Proposal[] = [
           "caseNo": "법제처 21-0233",
           "agency": "법제처",
           "date": "2021-06-18",
-          "link": "https://www.law.go.kr/expc/",
           "source": "seed"
         }
       ],
@@ -658,7 +650,6 @@ export const SEED_PROPOSALS: Proposal[] = [
           "caseNo": "2019헌마1399",
           "title": "옥외광고물 등 관리법 과태료 부과조항 위헌확인",
           "date": "2021-03-25",
-          "link": "https://www.law.go.kr/detc/",
           "source": "seed"
         }
       ],
@@ -669,7 +660,6 @@ export const SEED_PROPOSALS: Proposal[] = [
           "region": "부산광역시",
           "kind": "조례",
           "enforced": "20220105",
-          "link": "https://www.law.go.kr/ordin/",
           "source": "seed"
         },
         {
@@ -678,7 +668,6 @@ export const SEED_PROPOSALS: Proposal[] = [
           "region": "서울특별시",
           "kind": "조례",
           "enforced": "20220701",
-          "link": "https://www.law.go.kr/ordin/",
           "source": "seed"
         },
         {
@@ -687,7 +676,6 @@ export const SEED_PROPOSALS: Proposal[] = [
           "region": "서울특별시",
           "kind": "조례",
           "enforced": "20210311",
-          "link": "https://www.law.go.kr/ordin/",
           "source": "seed"
         }
       ],

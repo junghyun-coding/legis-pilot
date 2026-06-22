@@ -147,7 +147,7 @@ export default function ReportView({ report: raw }: { report: AnalysisReport }) 
                   <a
                     href={l.link}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     className="font-medium text-blue-700 underline"
                   >
                     {l.name}
@@ -172,7 +172,7 @@ export default function ReportView({ report: raw }: { report: AnalysisReport }) 
                   <a
                     href={it.link}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     className="font-medium text-blue-700 underline"
                   >
                     {it.title}
@@ -199,7 +199,7 @@ export default function ReportView({ report: raw }: { report: AnalysisReport }) 
                   <a
                     href={c.link}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     className="font-medium text-blue-700 underline"
                   >
                     <span className="font-bold">{c.caseNo}</span> {c.title}
@@ -226,7 +226,7 @@ export default function ReportView({ report: raw }: { report: AnalysisReport }) 
                   <a
                     href={o.link}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     className="font-medium text-blue-700 underline"
                   >
                     {o.name}

@@ -55,7 +55,7 @@ export default function ProposePage() {
       <header className="border-b border-slate-200 bg-white">
         <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
           <Link href="/" className="font-bold text-blue-700">
-            ⚖️ 국민참여입법센터
+            ⚖️ 법령이음
           </Link>
           <Link href="/dashboard" className="text-sm text-slate-500 hover:text-slate-800">
             공무원 검토 시스템 →
